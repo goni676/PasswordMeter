@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&&family=Libre+Franklin:wght@200;300&&family=PT+Sans&family=Raleway:wght@200;400;800&family=Rubik:wght@300&family=Tomorrow:ital,wght@0,200;0,300;0,500;0,700;1,400;1,500;1,600;1,800&family=Unbounded:wght@300;500&display=swap" rel="stylesheet">
    <style>
     body {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
+        font-weight: 300;
     font-size: 13px;
     text-align: center;
     display: flex;
@@ -52,11 +53,13 @@
         bottom: 0px;
         right: 20px;
         padding: 0px;
+        top: 10%;
         text-align: center;
         text-shadow: 0 2px 1px rgb(0, 0, 0);
     }
 
     label {
+        font-family: 'Raleway', sans-serif;
         animation: fadeIn 2s ease-in-out forwards; /* Add animation */
         font-style: normal;
         font-weight: 200;
@@ -124,19 +127,29 @@
     }
         button[type="close"] {
         font-family: 'Raleway', sans-serif;
-        padding: 10px 30px;
-        color: #f4f2f5f0;
-        background-color: rgba(3, 181, 139, 0);
+        padding: 15px 35px;
+        color: rgba(2, 2, 59, 0.94);
+        background-color: rgba(5, 185, 143, 0.84);
         font-size: 13px;
         border: 2px solid rgba(232, 232, 232, 0.71);
         border-radius: 80px;
         cursor: pointer;
         float: right;
         left: 20%;
-            right: 50%;
-            margin-top: 20px;
-            top: 90%;
-margin-right: 20px;
+        right: 50%;
+        margin-top: 30px;
+        margin-bottom: 250px;
+        top: 90%;
+        margin-right: 200px;
+        z-index: 2;
+    }
+        button[type="close"]:hover {
+        transition: border 0.3s ease, transform 0.3s ease;
+        font-size: 13px;
+        color: rgba(2, 2, 59, 0.94);
+        border: 1px solid rgba(2, 2, 59, 0.94);
+        background-color: rgba(5, 185, 143, 0.84);
+        transform: scale(1.05);
     }
 
     button[type="submit"]:hover {
@@ -215,7 +228,7 @@ margin-right: 20px;
         height: 25px;
         width: 230px;
         border-radius: 10px;
-        margin-top: 130px;
+        margin-top: 115px;
         margin-left: 670px;
         z-index: 2;
         transition: width 0.5s ease-in-out;
@@ -282,10 +295,10 @@ margin-right: 20px;
 }
 .info-container {
 
-    color: rgba(255, 255, 255, 0.71);
-    justify-content: center;
+    color: rgba(1, 8, 56, 0.71);
+    {#justify-content: center;#}
     display: none;
-    margin-left: 530px;
+    margin-left: 480px;
         width: 500px;
         height: 200px;
         position: fixed;
@@ -293,24 +306,41 @@ margin-right: 20px;
         left: 0%;
     border-radius: 5px;
     font-size: 15px;
-    background-color: rgba(1, 7, 23, 0.98);
-    padding: 10px;
+    background-color: rgba(227, 227, 227, 0.98);
+    padding: 20px;
     z-index: 1000;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.576);
-    text-align: justify;
+    {#text-align: justify;#}
 
 }
-        .overlay {
-            animation: fadeIn 1s ease-in-out forwards; /* Add animation */
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(208, 208, 208, 0.71); /* Adjust the alpha value to control darkness */
-            z-index: 999; /* Ensure the overlay is on top of everything else */
-        }
+.text-container {
+    font-family: 'Libre Franklin', sans-serif;
+        font-weight: 200;
+    color: rgba(1, 8, 56, 0.71);
+    justify-content: center;
+        position: fixed;
+        top: 30%;
+        left: 0%;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: rgba(227, 227, 227, 0.98);
+    padding: 20px;
+    z-index: 1000;
+
+    {#text-align: justify;#}
+
+}
+    .overlay {
+        animation: fadeIn 0.5s ease-in-out forwards; /* Add animation */
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 11, 38, 0.7); /* Adjust the alpha value to control darkness */
+        z-index: 999; /* Ensure the overlay is on top of everything else */
+    }
     </style>
 </head>
 <body>
@@ -321,7 +351,7 @@ margin-right: 20px;
             <div class="inner-shadow"></div>
             <div class="arrow"></div>
         </div>
-        <h1>Check Your Password</h1>
+        <h1>Test Your Password</h1>
         <label for="country">Country</label>
             <select id="country" name="country">
                 <option value="Other">Other</option>
@@ -345,12 +375,16 @@ margin-right: 20px;
     <script>
         $('#reverseButton').click(function () {
             var overlay = document.getElementById("overlay");
-            const content = ["","","Attackers commonly try to log into many different websites with the usernames and " +
-            "passwords they obtain from other sites' data breaches.", "Avoid using very common passwords as part of your own password\n" +
-            "Attackers frequently use other people's common passwords as a starting point for their guesses.", "Don't use your account information in your password\n" +
-            "Attackers know to guess your username and email address as part of your password", "Avoid using your date of birth as a password, as it's an easily guessable or obtainable piece of information for potential attackers. Many individuals rely on their birthdates as passwords, exposing themselves to the risk of identity theft, fraud, and various malicious activities."];
+            const content = ["","","Reusing passwords across multiple accounts invites troubles. If one account is compromised, attackers can exploit reused passwords to access other accounts. " +
+            "Unique passwords for each account prevent credential stuffing attacks, minimizing the potential damage.", "Avoid using very common passwords as part of your own password.\n" +
+            "Attackers guess passwords using pre-existing dictionaries. Unique passwords, unrelated to common words or phrases, thwart dictionary attacks, " +
+            "making it more challenging for hackers to gain unauthorized access to your accounts.", "Don't use your account information in your password.\n" +
+            "Attackers know to guess your username and email address as part of your password. Furthermore, refrain from including easily guessable information such as your name, birthdate, " +
+            "or pet's name in your passwords. Personal details like these can be readily accessible to attackers.", "Using dates in your password can pose a security risk. Birthdates, anniversaries, " +
+            "or other significant dates are often among the first things attackers try when attempting to crack a password,  because they are relatively easy to guess or obtain through social engineering or publicly available information."];
+            const titles = ["", "", "Password Reuse Risks", "Steer Clear of Common Passwords","Avoid Personal Information","Date-Based Password Risks"];
             const symbols = createDynamicSymbols();
-            const tmp  = createDynamicContainers(content);
+            const tmp  = createDynamicContainers(content, titles);
             const containers = tmp[0];
             const buttons = tmp[1];
             const username = $('#nameInput').val();
@@ -422,14 +456,11 @@ margin-right: 20px;
             const [ , , symbol2, symbol3, symbol4, symbol5] = symbols;
             const [ , , closeButton2, closeButton3, closeButton4, closeButton5] = buttons;
             function toggleSymbolDisplay(element) {
-                if (element.style.display === 'none' || element.style.display === '') {
+                {#if (element.style.display === 'none' || element.style.display === '') {#}
                     element.style.display = 'block';
                     overlay.style.display = 'block';
-                } else {
-                    element.style.display = 'none';
-
-
-                }
+                // else {
+                {#    element.style.display = 'none';#}
             }
             function toggleButtonDisplay(element) {
                     element.style.display = 'none';
@@ -464,25 +495,25 @@ margin-right: 20px;
             closeButton5.addEventListener('click', () => {
                 toggleButtonDisplay(infoContainer5);
             });
-            // document.addEventListener('click', (event) => {
-            //     if (event.target !== symbol2 && !infoContainer2.contains(event.target)) {
-            //         infoContainer2.style.display = 'none';
-            //
-            //     }
-            //     if (event.target !== symbol3 && !infoContainer3.contains(event.target)) {
-            //         infoContainer3.style.display = 'none';
-            //
-            //     }
-            //     if (event.target !== symbol4 && !infoContainer4.contains(event.target)) {
-            //         infoContainer4.style.display = 'none';
-            //
-            //     }
-            //     if (event.target !== symbol5 && !infoContainer5.contains(event.target)) {
-            //         infoContainer5.style.display = 'none';
-            //     }
+             document.addEventListener('click', (event) => {
+                 if (event.target !== symbol2 && !infoContainer2.contains(event.target)) {
+                     infoContainer2.style.display = 'none';
+
+              }
+                if (event.target !== symbol3 && !infoContainer3.contains(event.target)) {
+                  infoContainer3.style.display = 'none';
+
+                }
+                 if (event.target !== symbol4 && !infoContainer4.contains(event.target)) {
+                    infoContainer4.style.display = 'none';
+
+                 }
+                 if (event.target !== symbol5 && !infoContainer5.contains(event.target)) {
+                     infoContainer5.style.display = 'none';
+            }
 
         });
-        // });
+         });
         function updateMeter(rank) {
             const val = rank / 70
             if (val < 0.5) {
@@ -508,30 +539,60 @@ margin-right: 20px;
         return symbols;
         }
 
-        function createDynamicContainers(content) {
+        function createDynamicContainers(content, titles) {
             const containers = [0,1]
             const bottuns = [0,1];
             for (let i = 2; i < 6; i++) {
-                var container = document.createElement("div");
-                const tmp = "infoContainer" + i;
-                container.className = "info-container";
-                container.id = tmp;
-                var text = document.createTextNode(content[i]);
-                var closeButton = document.createElement("button");
-                closeButton.id = "closeButton"+i;
-                closeButton.type = "close";
-                closeButton.textContent = "close";
-                container.appendChild(closeButton);
-                container.appendChild(text);
+                const title = createTitle(titles[i]);
+                var text_container = createTextContainer(content[i]);
+                var closeButton = createCloseButton(i);
+                var info_container = createInfoContainer(i, title, text_container, closeButton);
                 var body = document.body;
-                body.appendChild(container);
-                containers.push(container);
+                body.appendChild(info_container);
+                containers.push(info_container);
                 bottuns.push(closeButton);
             }
              return [containers, bottuns];
+
+        }
+        function createTitle(title_text){
+            const title = document.createElement('span');
+            title.textContent = title_text;
+            title.style.fontWeight = 'bold';
+            title.style.align  = 'center';
+            title.style.fontSize = "17px";
+            title.style.fontFamily = "'Raleway', sans-serif";
+            return title;
+        }
+        function createTextContainer(content){
+            var text = document.createTextNode(content);
+            var text_container = document.createElement("div");
+            text_container.style.textAlign = 'justify';
+            text_container.appendChild(text);
+            return text_container;
         }
 
+        function createCloseButton(index) {
+            var closeButton = document.createElement("button");
+            closeButton.id = "closeButton" + index;
+            closeButton.type = "close";
+            closeButton.textContent = "close";
+            return closeButton;
+        }
 
+        function createInfoContainer(index, title, text_container, closeButton){
+            var container = document.createElement("div");
+            container.className = "info-container";
+            container.id = "infoContainer" + index;
+            const lineBreak1 = document.createElement('br');
+            const lineBreak2 = document.createElement('br');
+            container.appendChild(title);
+            container.appendChild(lineBreak1);
+            container.appendChild(lineBreak2);
+            container.appendChild(text_container);
+            container.appendChild(closeButton);
+            return container;
+        }
     </script>
 </body>
 </html>
