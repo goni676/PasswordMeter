@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reverse Name</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&&family=Libre+Franklin:wght@200;300&&family=PT+Sans&family=Raleway:wght@200;400;800&family=Rubik:wght@300&family=Tomorrow:ital,wght@0,200;0,300;0,500;0,700;1,400;1,500;1,600;1,800&family=Unbounded:wght@300;500&display=swap" rel="stylesheet">
+   <style>
+    body {
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    padding: 0px;
+    background-color: #dadada;; /* Set the background color */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    background-size: cover; /* Scale the background image to cover the entire body */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+            color:#e3e3e3;
+    margin: 0;
+}
+
+    h1 {
+        font-family: 'Audiowide', cursive;
+        margin: 0;
+        margin-top: 0px;
+        margin-bottom:40px;
+        margin-right: 350px;
+        font-size: 55px;
+        color: rgba(180, 231, 157, 0.77);
+        opacity: 0; /* Initially hidden */
+        animation: fadeIn 2s ease-in-out forwards; /* Add animation */
+        bottom: 0px;
+        right: 20px;
+        padding: 0px;
+        text-align: center;
+        text-shadow: 0 5px 3px rgb(0, 0, 0);
+    }
+
+    h2 {
+        font-family: 'Libre Franklin', sans-serif;
+        font-weight: 300;
+        margin-left: 20px;
+        margin-top: 0px;
+        margin-bottom:0px;
+        font-size: 20px;
+        color: rgba(124, 151, 173, 0.9);
+        bottom: 0px;
+        right: 20px;
+        padding: 0px;
+        text-align: center;
+        text-shadow: 0 2px 1px rgb(0, 0, 0);
+    }
+
+    label {
+        animation: fadeIn 2s ease-in-out forwards; /* Add animation */
+        font-style: normal;
+        font-weight: 200;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 15px;
+        color:#e3e3e3;
+        margin-right: 350px;
+    }
+
+    input[type="text"] {
+        animation: fadeIn 2s ease-in-out forwards; /* Add animation */
+        background-color: #ffffffc1;
+        padding: 8px;
+        width: 200px;
+        border-radius: 4px;
+        border: 1px  #ffffffc1;
+        margin-bottom: 15px;
+        margin-right: 350px;
+        font-size: 13px;
+    }
+   @keyframes fadeIn{
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+    button[type="continue"] {
+        font-family: 'Raleway', sans-serif;
+        padding: 15px 35px;
+        color: #f4f2f5f0;
+        background-color: rgba(72, 3, 220, 0);
+        font-size: 13px;
+        border: 2px solid rgba(232, 232, 232, 0.71);
+        border-radius: 80px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        float: right;
+        margin-right: 583px;
+        margin-top: 20px;
+    }
+
+    button[type="continue"]:hover {
+        color: #040006f0;
+        background-color: rgba(229, 241, 121, 0.75);
+        transform: scale(1.05);
+    }
+
+    button[type="submit"] {
+        font-family: 'Raleway', sans-serif;
+        padding: 15px 35px;
+        color: #f4f2f5f0;
+        background-color: rgba(3, 181, 139, 0);
+        font-size: 13px;
+        border: 2px solid rgba(232, 232, 232, 0.71);
+        border-radius: 80px;
+        cursor: pointer;
+        float: right;
+        margin-right: 590px;
+        margin-top: 20px;
+    }
+        button[type="close"] {
+        font-family: 'Raleway', sans-serif;
+        padding: 10px 30px;
+        color: #f4f2f5f0;
+        background-color: rgba(3, 181, 139, 0);
+        font-size: 13px;
+        border: 2px solid rgba(232, 232, 232, 0.71);
+        border-radius: 80px;
+        cursor: pointer;
+        float: right;
+        left: 20%;
+            right: 50%;
+            margin-top: 20px;
+            top: 90%;
+margin-right: 20px;
+    }
+
+    button[type="submit"]:hover {
+        color: #f4f2f5f0;
+        background-color: rgba(147, 246, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    .container {
+        text-align: center;
+        background-image: url('https://drive.google.com/uc?export=download&id=1tnOhI9iAgCy3ftoXEyU3c5e5fhwUBXA6'); /* Set the background image */
+        background-repeat: no-repeat; /* Prevent the background image from repeating */
+        background-size: cover; /* Scale the background image to cover the entire body */
+        justify-content: center;
+        padding: 120px;
+        width: 950px;
+        height: 500px;
+        left: 50%;
+        border-radius: 5px;
+        box-shadow: 0 15px 8px rgba(0, 0, 0, 0.576);
+                z-index: 2;
+    }
+
+    .square-container {
+            cursor: pointer;
+        background-color: rgba(3, 17, 78, 0);
+        animation: fadeIn 1s ease-in-out forwards; /* Add animation */
+        display: none;
+        font-family: 'Libre Franklin', sans-serif;
+        font-weight: 200;
+        text-align: left;
+        font-size: 13px;
+        margin-left: 500px;
+        width: 420px;
+        height: 470px;
+        padding: 15px;
+        position: fixed;
+        top: 37%;
+        left: 20%;
+        border-radius: 5px;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+    }
+
+    select {
+        animation: fadeIn 2s ease-in-out forwards; /* Add animation */
+        appearance: none; /* Remove default appearance */
+        -webkit-appearance: none; /* For Safari */
+        -moz-appearance: none; /* For Firefox */
+        font-family: 'Raleway', sans-serif;
+        background-color: #ffffffc1;
+        font-size: 13px;
+        padding: 8px;
+        width: 218px;
+        border-radius: 4px;
+        border: 1px  #ffffffc1;
+        margin-bottom: 15px;
+        margin-right: 350px;
+    }
+
+    .inner-shadow {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: inset 40px 0px 70px rgba(0, 0, 0, 0.5); /* Adjust shadow properties */
+        border-radius: 10px; /* Optional: Match the container's border radius */
+    }
+    .meter {
+        animation: fadeIn 1s ease-in-out forwards; /* Add animation */
+        object-fit: cover;
+        position: absolute;
+        display: none;
+        height: 25px;
+        width: 230px;
+        border-radius: 10px;
+        margin-top: 130px;
+        margin-left: 670px;
+        z-index: 2;
+        transition: width 0.5s ease-in-out;
+        border: 0px solid #1c9600; /* Border */
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.745);
+    }
+
+    .arrow {
+        transition: left 0.3s ease-in-out;
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 10px 5px 0;
+        border-style: solid;
+        border-color: rgba(255, 255, 255, 0.84) transparent transparent transparent;
+    }
+
+    p_1 {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 500;
+        text-align: center;
+        color: #E3E3E3FF;
+        font-size: 19px;
+
+    }
+    p_2 {
+        font-family: 'Raleway', sans-serif;
+        text-align: justify;
+        font-weight: 400;
+        color: #E3E3E3FF;
+        font-size: 16px;
+    }
+    ul {
+        list-style-type: none; /* Remove default bullet style */
+        padding: 0;
+    }
+
+    li {
+        font-style: normal;
+        font-weight: 200;
+        display: flex; /* Use flexbox to create columns */
+        align-items: center; /* Center items vertically in each row */
+        margin-bottom: 12px; /* Add space between rows */
+        font-size: 17px;
+        color: #E3E3E3FF;
+        margin-right: 9px; /* Space between bullet and text */
+    }
+
+    .icon-column {
+        flex: 0 0 auto; /* Allow the icon column to shrink to its content */
+        margin-right: 10px; /* Add space between icon and text */
+    }
+
+    .text-column {
+        flex: 1; /* Allow the text column to expand and fill available space */
+    }
+
+.info-symbol {
+    display: none;
+    font-size: 18px;
+    color: #007BFF; /* Change the color to your preference */
+    margin-left: 5px;
+}
+.info-container {
+
+    color: rgba(255, 255, 255, 0.71);
+    justify-content: center;
+    display: none;
+    margin-left: 530px;
+        width: 500px;
+        height: 200px;
+        position: fixed;
+        top: 30%;
+        left: 0%;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: rgba(1, 7, 23, 0.98);
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.576);
+    text-align: justify;
+
+}
+        .overlay {
+            animation: fadeIn 1s ease-in-out forwards; /* Add animation */
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(208, 208, 208, 0.71); /* Adjust the alpha value to control darkness */
+            z-index: 999; /* Ensure the overlay is on top of everything else */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    <div id = "container" class="container">
+
+        <div class="meter" id="meter">
+            <div class="inner-shadow"></div>
+            <div class="arrow"></div>
+        </div>
+        <h1>Check Your Password</h1>
+        <label for="country">Country</label>
+            <select id="country" name="country">
+                <option value="Other">Other</option>
+                <option value="Afghanistan">Afghanistan</option>
+            </select>
+        <br>
+        <label for="nameInput">Username</label>
+            <input type="text" id="nameInput">
+        <br>
+        <label for="password">Password</label>
+            <input type="text" id="password">
+        <br>
+        <button type="submit"id="reverseButton">submit</button>
+        <div id="resultContainer" class="square-container">
+            <ul id="mylist">
+            </ul>
+        </div>
+        <button type="continue" button id="responseButton" style="display: none"></button>
+    </div>
+
+    <script>
+        $('#reverseButton').click(function () {
+            var overlay = document.getElementById("overlay");
+            const content = ["","","Attackers commonly try to log into many different websites with the usernames and " +
+            "passwords they obtain from other sites' data breaches.", "Avoid using very common passwords as part of your own password\n" +
+            "Attackers frequently use other people's common passwords as a starting point for their guesses.", "Don't use your account information in your password\n" +
+            "Attackers know to guess your username and email address as part of your password", "Avoid using your date of birth as a password, as it's an easily guessable or obtainable piece of information for potential attackers. Many individuals rely on their birthdates as passwords, exposing themselves to the risk of identity theft, fraud, and various malicious activities."];
+            const symbols = createDynamicSymbols();
+            const tmp  = createDynamicContainers(content);
+            const containers = tmp[0];
+            const buttons = tmp[1];
+            const username = $('#nameInput').val();
+            const password = $('#password').val();
+            const meter = document.getElementById('meter');
+            $.ajax({
+                type: 'POST',
+                url: '/reverse_name',
+                data: JSON.stringify({ "username": username, "password":password}),
+                contentType: 'application/json',
+                success: function (response) {
+                    const rank = response.rank;
+                    const indicators = response.indicators;
+                    const info_list = response.info_list;
+                    const resultContainer = $('#resultContainer');
+                    resultContainer.html(`
+                    <ul id="mylist">
+                            <li>
+                                <span class="icon-column"><i class="material-icons">lock_outline</i></span>
+                                <span class="text-column">${response.feedback1}</span>
+                            </li>
+                            <li>
+                                <span class="icon-column"><i class="material-icons">lock_outline</i></span>
+                                <span class="text-column">${response.feedback2}</span>
+                            </li>
+                            <li>
+                                <span class="icon-column"><i class="material-icons">lock_outline</i></span>
+                                <span class="text-column">${response.feedback3}</span>
+                            </li>
+                                                        <li>
+                                <span class="icon-column"><i class="material-icons">lock_outline</i></span>
+                                <span class="text-column">${response.feedback4}</span>
+                            </li>
+                                                        <li>
+                                <span class="icon-column"><i class="material-icons">lock_outline</i></span>
+                                <span class="text-column">${response.feedback5}</span>
+                            </li>
+                            </ul>
+                            `);
+                    // const feedbacks = [response.feedback2, response.feedback3, response.feedback4,response.feedback5];
+
+                        const list_feedbacks = document.getElementById('mylist');
+                        const listItems = list_feedbacks.getElementsByTagName('li');
+                               for (let i = 5; i > 1; i--) {
+                        if (!indicators[i]){
+                            mylist.removeChild(listItems[i-1]);
+                        }
+                    }
+                        for (let i = 1; i < info_list.length; i++) {
+                            const index = info_list[i];
+                            const Item = listItems[i];
+                                    Item.appendChild(symbols[index]);
+                                    symbols[index].style.display = "inline";
+                        }
+                                     /*<span id="info-symbol-2" style="display: block;"></span>*/
+                      resultContainer.css('display', 'block');
+                        updateMeter(rank);
+                        meter.style.display = 'block';
+
+
+                    }
+            })
+
+            var responseButton = document.getElementById("responseButton");
+            var response = "Continue";
+            responseButton.style.display = "inline";
+            responseButton.innerText = response;
+            const [ , , infoContainer2, infoContainer3, infoContainer4, infoContainer5] = containers;
+            const [ , , symbol2, symbol3, symbol4, symbol5] = symbols;
+            const [ , , closeButton2, closeButton3, closeButton4, closeButton5] = buttons;
+            function toggleSymbolDisplay(element) {
+                if (element.style.display === 'none' || element.style.display === '') {
+                    element.style.display = 'block';
+                    overlay.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+
+
+                }
+            }
+            function toggleButtonDisplay(element) {
+                    element.style.display = 'none';
+                    overlay.style.display = 'none';
+                }
+
+            symbol2.addEventListener('click', () => {
+                toggleSymbolDisplay(infoContainer2);
+            });
+
+            symbol3.addEventListener('click', () => {
+                toggleSymbolDisplay(infoContainer3);
+            });
+            symbol4.addEventListener('click', () => {
+                toggleSymbolDisplay(infoContainer4);
+            });
+
+            symbol5.addEventListener('click', () => {
+                toggleSymbolDisplay(infoContainer5);
+            });
+                        closeButton2.addEventListener('click', () => {
+                toggleButtonDisplay(infoContainer2);
+            });
+
+            closeButton3.addEventListener('click', () => {
+                toggleButtonDisplay(infoContainer3);
+            });
+            closeButton4.addEventListener('click', () => {
+                toggleButtonDisplay(infoContainer4);
+            });
+
+            closeButton5.addEventListener('click', () => {
+                toggleButtonDisplay(infoContainer5);
+            });
+            // document.addEventListener('click', (event) => {
+            //     if (event.target !== symbol2 && !infoContainer2.contains(event.target)) {
+            //         infoContainer2.style.display = 'none';
+            //
+            //     }
+            //     if (event.target !== symbol3 && !infoContainer3.contains(event.target)) {
+            //         infoContainer3.style.display = 'none';
+            //
+            //     }
+            //     if (event.target !== symbol4 && !infoContainer4.contains(event.target)) {
+            //         infoContainer4.style.display = 'none';
+            //
+            //     }
+            //     if (event.target !== symbol5 && !infoContainer5.contains(event.target)) {
+            //         infoContainer5.style.display = 'none';
+            //     }
+
+        });
+        // });
+        function updateMeter(rank) {
+            const val = rank / 70
+            if (val < 0.5) {
+                const color = `rgb(${255}, ${val * 510}, 0)`;
+                meter.style.backgroundColor = color;
+            } else {
+                const color = `rgb(${382 - (255 * val)}, ${255}, 0)`;
+                meter.style.backgroundColor = color;
+            }
+                            const arrow = document.querySelector('.arrow');
+            arrow.style.left = val*100+'%';
+        }
+        function createDynamicSymbols() {
+            const symbols = [0,1];
+            for (let i = 2; i < 6; i++) {
+            var symbol = document.createElement("span");
+            const tmp = "info-symbol-"+i;
+            symbol.className = "info-symbol";
+            symbol.id = tmp;
+            symbol.innerHTML = "&#9432;";
+            symbols.push(symbol);
+        }
+        return symbols;
+        }
+
+        function createDynamicContainers(content) {
+            const containers = [0,1]
+            const bottuns = [0,1];
+            for (let i = 2; i < 6; i++) {
+                var container = document.createElement("div");
+                const tmp = "infoContainer" + i;
+                container.className = "info-container";
+                container.id = tmp;
+                var text = document.createTextNode(content[i]);
+                var closeButton = document.createElement("button");
+                closeButton.id = "closeButton"+i;
+                closeButton.type = "close";
+                closeButton.textContent = "close";
+                container.appendChild(closeButton);
+                container.appendChild(text);
+                var body = document.body;
+                body.appendChild(container);
+                containers.push(container);
+                bottuns.push(closeButton);
+            }
+             return [containers, bottuns];
+        }
+
+
+    </script>
+</body>
+</html>
