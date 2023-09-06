@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Update</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,13 +35,13 @@
         margin: 0;
         margin-top: 0px;
         margin-bottom:30px;
-        margin-right: 350px;
+        margin-right: 400px;
         font-size: 40px;
         color: rgba(180, 231, 157, 0.77);
         opacity: 0; /* Initially hidden */
         animation: fadeIn 2s ease-in-out forwards; /* Add animation */
         bottom: 0px;
-        right: 20px;
+        right: 10px;
         padding: 0px;
         text-align: center;
         text-shadow: 0 5px 3px rgb(0, 0, 0);
@@ -69,7 +72,7 @@
         margin-bottom: 5px;
         font-size: 16px;
         color:#e3e3e3;
-        margin-right: 350px;
+        margin-right: 400px;
     }
     input[type="number"] {
         animation: fadeIn 2s ease-in-out forwards; /* Add animation */
@@ -80,7 +83,7 @@
         border: 1px  #ffffffc1;
         margin-bottom: 25px;
         margin-top: 12px;
-        margin-right: 350px;
+        margin-right: 400px;
         font-size: 13px;
     }
 
@@ -93,7 +96,7 @@
         border-radius: 4px;
         border: 1px  #ffffffc1;
         margin-bottom: 25px;
-        margin-right: 350px;
+        margin-right: 400px;
         font-size: 13px;
     }
    @keyframes fadeIn {
@@ -150,7 +153,7 @@
         border-radius: 80px;
         cursor: pointer;
         float: right;
-        margin-right: 610px;
+        margin-right: 640px;
         margin-top: 20px;
     }
         button[type="close"] {
@@ -214,7 +217,7 @@
         button[type="show"] {
             display: none;
         font-family: 'Raleway', sans-serif;
-        padding: 15px 10px;
+        padding: 10px 10px;
         color: rgba(253, 252, 252, 0.89);
         background-color: rgba(5, 185, 143, 0);
         font-size: 13px;
@@ -363,7 +366,7 @@
         font-weight:bold;
         text-align: left;
         color: rgb(246, 14, 14);
-        font-size: 21px;
+        font-size: 20px;
         text-shadow: 10px 15px 30px rgb(0, 0, 0);
         animation: slideInFromTop 2s ease-in-out forwards;
     }
@@ -448,6 +451,36 @@
 
     }
 
+            .percentage-container {
+                display: none;
+            width: 50px;
+            height:50px;
+            padding: 15px;
+            border: 1px solid rgba(208, 208, 208, 0.36);
+            justify-content: center;
+            margin-top: -60px;
+            background-color: rgba(232, 232, 232, 0);
+            text-align: center;
+            border-radius: 100px;
+            float: left;
+            font-size: 12px;
+            position: fixed;
+                margin-left: 410px;
+
+        }
+            .percentage-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8px;
+                background-color: #addc12;
+        }
+        #number-container {
+            font-size: 15px;
+            font-weight: bold;
+            top: 90%;
+        }
 
     </style>
 </head>
@@ -497,6 +530,8 @@
             const resultContainer = document.getElementById('resultContainer');
             const buttons = [];
             const sub_containers = [];
+            const percentage_containers = [];
+            const number_containers = [];
             $.ajax({
                 type: 'POST',
                 url: '/new_password',
@@ -504,12 +539,13 @@
                 contentType: 'application/json',
                 success: function (response) {
                     //rank, password, quote_release, with_quote, symbols_list, symbols_str, lucky_list, lucky_str
-                    const rank = response.rank;
+                    const ranks = response.ranks;
                     const password = response.password;
                     const quote_release = response.quote_release;
                     const symbols_list = response.symbols_list;
                     const lucky_list = response.lucky_list;
                     const lucky_str = response.lucky_str;
+                    console.log(ranks);
                     const titleContainer = $('#titleContainer');
                     titleContainer.html(`<p_2> Suggested Password:  </p_2> <p_4> ${lucky_str}`);
                     const content = ["Your initial password.", "Quote initials with random capitalization were " +
@@ -517,8 +553,8 @@
                     "Your lucky number was added at a random position."];
                     const titles_list = [];
                     titles_list.push(createTitle0(password), createTitle1(quote_release, password), createTitle2(symbols_list), createTitle3(lucky_list));
-                    updateMeter(rank);
-                    var process_container = create_process(titles_list, content, buttons, sub_containers);
+                    updateMeter(ranks[3]);
+                    var process_container = create_process(titles_list, content, buttons, sub_containers, percentage_containers, number_containers);
                     dynamic_container.appendChild(process_container);
                     meter.style.display = 'block';
                     resultContainer.style.display = 'block';
@@ -526,23 +562,42 @@
                     show_process.style.display = 'block';
                     dynamic_container.style.display = 'block';
                     process_container.style.display = 'block';
-
                     const [nextButton0, nextButton1, nextButton2] = buttons;
                     const [subContainer0, subContainer1, subContainer2, subContainer3] = sub_containers;
+                    const [percentage_container0, percentage_container1, percentage_container2, percentage_container3] = percentage_containers;
+                    const [number_container0, number_container1, number_container2, number_container3] = number_containers;
+
                     show_process.addEventListener('click', () => {
                     subContainer0.style.display = 'block';
+                    const curr = 0;
+                    const target = Math.round(((ranks[0]/70)*100));
+                    percentage_container0.style.display = 'block';
+                    animateNumbers(number_container0, curr, target);
                     nextButton0.style.display = 'block';
                     });
                     nextButton0.addEventListener('click', () => {
                     subContainer1.style.display = 'block';
+                    const curr = Math.round(((ranks[0]/70)*100));
+                    const target = Math.round(((ranks[1]/70)*100));
+                    percentage_container1.style.display = 'block';
+                    animateNumbers(number_container1, curr, target);
                     nextButton1.style.display = 'block';
+
                     });
                     nextButton1.addEventListener('click', () => {
                     subContainer2.style.display = 'block';
+                    const curr = Math.round(((ranks[1]/70)*100));
+                    const target = Math.round((ranks[2]/70)*100);
+                    percentage_container2.style.display = 'block';
+                    animateNumbers(number_container2, curr, target);
                     nextButton2.style.display = 'block';
                     });
                     nextButton2.addEventListener('click', () => {
                     subContainer3.style.display = 'block';
+                    const curr = Math.round((ranks[2]/70)*100);
+                    const target = Math.round((ranks[3]/70)*100);
+                    percentage_container3.style.display = 'block';
+                    animateNumbers(number_container3, curr, target);
                     });
                 }
             })
@@ -557,11 +612,11 @@
                 const color = `rgb(${382 - (255 * val)}, ${255}, 0)`;
                 meter.style.backgroundColor = color;
             }
-                            const arrow = document.querySelector('.arrow');
+            const arrow = document.querySelector('.arrow');
             arrow.style.left = val*100+'%';
         }
 
-        function create_process(titles_list, content, buttons, sub_containers) {
+        function create_process(titles_list, content, buttons, sub_containers, percentage_containers, number_containers) {
             var lineBreak1 = document.createElement("div");
             lineBreak1.className = "line";
             var main_container = document.createElement("div");
@@ -572,23 +627,66 @@
                 var sub_container = create_sub_process(titles_list[i], content[i], i, buttons);
                 main_container.appendChild(sub_container);
                 sub_containers.push(sub_container);
+                var tmp = create_percentage_container(i);
+                var percentage_container = tmp[0];
+                var number_container = tmp[1];
+                percentage_containers.push(percentage_container);
+                number_containers.push(number_container);
                 if (i != 3){
                     var nextButton = createNextButton(i);
+
                     if(i == 0){
                         sub_container.style.marginLeft="120px";
                         main_container.appendChild(lineBreak1);
+                        main_container.appendChild(percentage_container);
+                    }
+                    if (i==1){
+                        percentage_container.style.marginTop="59px";
+                        main_container.appendChild(percentage_container);
+                    }
+                    if(i==2){
+                        percentage_container.style.marginTop = "202px"
+                        main_container.appendChild(percentage_container);
+
                     }
                     main_container.appendChild(nextButton);
                     buttons.push(nextButton);
+
                 }
                 else{
+                    percentage_container.style.marginTop = "322px"
+                    main_container.appendChild(percentage_container);
                     sub_container.style.marginLeft="27px";
                 }
 
             }
             return main_container;
         }
-
+function create_progress_container() {
+            var progress_container = document.createElement("div");
+            progress_container.className = "square-container";
+            progress_container.style.marginTop = "125px";
+            progress_container.style.marginLeft = "850px";
+            progress_container.style.width = "40px";
+            return progress_container;
+}
+function create_percentage_container(index){
+            var percentage_container = document.createElement("div");
+            percentage_container.className ="percentage-container";
+            percentage_container.id = "percentage_container" + index;
+            var number_container = document.createElement("div");
+            number_container.className = "number-container";
+            number_container.id = "number_container" + index;
+            number_container.style.color = "rgba(49, 197, 241, 0.73)";
+            number_container.style.fontWeight = "bold";
+            var text = document.createTextNode("Current Score:");
+            var line = document.createElement("div");
+            line.style.height = "5px";
+            percentage_container.appendChild(text);
+            percentage_container.appendChild(line);
+            percentage_container.appendChild(number_container);
+            return [percentage_container, number_container];
+}
         function create_sub_process(title_container, content, index, buttons){
             var text_container = createTextContainer(content);
             var container = document.createElement("div");
@@ -669,6 +767,19 @@
             text_container.appendChild(title1);
             text_container.appendChild(title2);
             return text_container;
+        }
+            function animateNumbers(number_container, currentValue, targetValue) {
+            const animationInterval = 50;
+            number_container.textContent = currentValue+'/100';
+            function updateNumber() {
+                if (currentValue < targetValue) {
+                    currentValue++;
+                    number_container.textContent = currentValue+'/100';
+                    setTimeout(updateNumber, animationInterval);
+                } else {
+                }
+            }
+            updateNumber();
         }
     </script>
 </body>
