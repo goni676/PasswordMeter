@@ -13,22 +13,30 @@ def find_date(text):
         return match.group()
 
 
-
-# if contains_date(text):
-#     print("The text contains a date.")
-# else:
-#     print("No date found in the text.")
-
-
 def contains_mutual_substring(str1, str2):
-    str1_lower = str1.lower()
-    str2_lower = str2.lower()
+    m = len(str1)
+    n = len(str2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
 
-    for i in range(len(str1_lower)):
-        for j in range(3, len(str1_lower) - i + 1):
-            substring = str1_lower[i:i + j]
-            if substring in str2_lower:
-                return 1, substring
+    # Variables to keep track of the maximum length and ending position of the substring
+    max_length = 0
+    end_position = 0
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+                if dp[i][j] > max_length:
+                    max_length = dp[i][j]
+                    end_position = i  # Update the ending position of the substring
+            else:
+                dp[i][j] = 0
+
+    # If a common substring of length greater than 2 exists, extract it
+    if max_length > 2:
+        start_position = end_position - max_length
+        largest_common_substring = str1[start_position:end_position]
+        return 1, largest_common_substring
 
     return 0, ""
 
